@@ -1,5 +1,6 @@
 import React from "react";
 import GameCard from "./GameCard";
+import PropTypes from "prop-types";
 
 const GameList = ({ games }) => (
   <div className="ui five cards">
@@ -8,5 +9,9 @@ const GameList = ({ games }) => (
     ))}
   </div>
 );
+
+GameList.propTypes = {
+  games: PropTypes.arrayOf(PropTypes.object).isRequired
+};
 
 export default GameList;
