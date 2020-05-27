@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Component } from "react";
 import GameList from "./GameList";
+import { thisExpression } from "@babel/types";
 
 const games = [
   {
@@ -33,10 +34,31 @@ const games = [
   }
 ];
 
-const App = () => (
-  <div className="ui container">
-    <GameList games={games} />
-  </div>
-);
+class App extends React.Component {
+  //Defining state using constructor
+  /*constructor(props) {
+    super(props);
+    this.state = {
+      games: []
+    };
+  }*/
+
+  state = {
+    games: []
+  };
+
+  // we call this hook method, when app component is ready to mount
+  componentDidMount() {
+    this.setState({ games });
+  }
+
+  render() {
+    return (
+      <div className="ui container">
+        <GameList games={this.state.games} />
+      </div>
+    );
+  }
+}
 
 export default App;
