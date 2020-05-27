@@ -3,7 +3,7 @@ import GameCard from "./GameCard";
 import PropTypes from "prop-types";
 
 const GameList = ({ games }) => (
-  <div className="ui five cards">
+  <div className="ui four cards">
     {games.length === 0 ? (
       <div className="ui icon message">
         <i className="icon info" />
