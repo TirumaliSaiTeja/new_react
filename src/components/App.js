@@ -45,6 +45,7 @@ class App extends React.Component {
     this.state = {
       games: []
     };
+    this.toggleFeatured = this.toggleFeatured.bind(this) 
   }*/
 
   state = {
@@ -54,13 +55,30 @@ class App extends React.Component {
   // we call this hook method, when app component is ready to mount
   componentDidMount() {
     this.setState({
-      games: _orderBy(games, ["featured", "name"], ["desc", "asc"])
+      games: this.sortGames(games)
     });
   }
 
-  toggleFeatured(games) {
-    alert("toggle");
+  sortGames(games) {
+    return _orderBy(games, ["featured", "name"], ["desc", "asc"]);
   }
+  /* one way of declaring toggle function 
+  toggleFeatured= gameId =>   {
+    const newGames=  this.state.games.map(game => {
+      if (game._id === gameId) return { ...game, featured: !game.featured};
+      return game;
+    });   
+    this.setState ({games : this.sortGames(newGames)})
+  }*/
+  //Second Method
+  toggleFeatured = gameId =>
+    this.setState({
+      games: this.sortGames(
+        this.state.games.map(game =>
+          gameId === game.id ? { ...game, featured: !game.featured } : game
+        )
+      )
+    });
 
   render() {
     return (

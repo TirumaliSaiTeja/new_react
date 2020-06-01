@@ -9,7 +9,7 @@ const GameCard = ({ game }) => (
       <span className="ui green ribbon label">{game.price}</span>
       <Featured
         featured={game.featured}
-        g
+        // eslint-disable-next-line no-undef
         toggleFeatured={toggleFeatured}
         gameId={game._id}
       />
