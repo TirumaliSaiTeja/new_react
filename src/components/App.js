@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import GameList from "./GameList";
 import { thisExpression } from "@babel/types";
 import _orderBy from "lodash/orderBy";
+import GameForm from "./GameForm";
 
 const games = [
   {
@@ -83,6 +84,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="ui container">
+        <GameForm />
+        <br />
         <GameList
           games={this.state.games}
           toggleFeatured={this.toggleFeatured}
