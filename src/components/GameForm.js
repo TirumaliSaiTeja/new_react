@@ -11,6 +11,8 @@ class GameForm extends Component {
     players: ""
   };
 
+  // event handlers
+
   handleSubmit = e => {
     e.preventDefault();
     console.log(this.state);
