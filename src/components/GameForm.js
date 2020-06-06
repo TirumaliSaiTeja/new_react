@@ -2,13 +2,21 @@
 import React, { Component } from "react";
 import { parse } from "@babel/core";
 
+const tags = [
+  { _id: 1, name: "dice" },
+  { _id: 2, name: "economic" },
+  { _id: 3, name: "family" }
+];
+
 class GameForm extends Component {
   state = {
     name: "",
     description: "",
     price: 0,
     duration: 0,
-    players: ""
+    players: "",
+    featured: false,
+    tags: []
   };
 
   // event handlers
@@ -18,13 +26,23 @@ class GameForm extends Component {
     console.log(this.state);
   };
 
-  handleChange = e =>
+  /*handleChange = e =>
     this.setState({
       [e.target.name]:
         e.target.type === "number"
           ? parseInt(e.target.value, 10)
           : e.target.value
-    });
+    });*/
+
+  handleStringChange = e => this.setState({ [e.target.name]: e.target.value });
+  handleNumberChange = e =>
+    this.setState({ [e.target.name]: parseInt(e.target.value, 10) });
+  handleCheckboxChange = e =>
+    this.setState({ [e.target.name]: e.target.checked });
+  toggleTag = tag =>
+    this.state.tags.includes(tag._id)
+      ? this.setState({ tags: this.state.tags.filter(id => id !== tag._id) })
+      : this.setState({ tags: [...this.state.tags, tag._id] });
 
   render() {
     return (
@@ -38,7 +56,7 @@ class GameForm extends Component {
             placeholder="Full game title"
             //ref={input => (this.name = input)}
             value={this.state.name}
-            onChange={this.handleChange}
+            onChange={this.handleStringChange}
           />
         </div>
 
@@ -51,7 +69,7 @@ class GameForm extends Component {
             placeholder="Full game description"
             //ref={input => (this.name = input)}
             value={this.state.description}
-            onChange={this.handleChange}
+            onChange={this.handleStringChange}
           />
         </div>
         <div className="three fields">
@@ -62,7 +80,7 @@ class GameForm extends Component {
               id="price"
               name="price"
               value={this.state.price}
-              onChange={this.handleChange}
+              onChange={this.handleStringChange}
             />
           </div>
           <div className="field">
@@ -72,7 +90,7 @@ class GameForm extends Component {
               id="duration"
               name="duration"
               value={this.state.duration}
-              onChange={this.handleChange}
+              onChange={this.handleNumberChange}
             />
           </div>
           <div className="field">
@@ -82,9 +100,35 @@ class GameForm extends Component {
               id="players"
               name="players"
               value={this.state.players}
-              onChange={this.handleChange}
+              onChange={this.handleNumberChange}
             />
           </div>
+        </div>
+
+        <div className="inline field">
+          <input
+            id="featured"
+            name="featured"
+            type="checkbox"
+            checked={this.state.featured}
+            onChange={this.handleCheckboxChange}
+          />
+          <label htmlFor="featured">Featured?</label>
+        </div>
+
+        <div className="field">
+          <label>Tags</label>
+          {tags.map(tag => (
+            <div key={tag._id} className="inline field">
+              <input
+                id={`tag-${tag._id}`}
+                type="checkbox"
+                checked={this.state.tags.includes(tag._id)}
+                onChange={() => this.toggleTag(tag)}
+              />
+              <label htmlFor={`tag-${tag._id}`}>{tag.name}</label>
+            </div>
+          ))}
         </div>
 
         <button className="ui button" type="submit">
