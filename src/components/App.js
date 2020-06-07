@@ -4,9 +4,20 @@ import { thisExpression } from "@babel/types";
 import _orderBy from "lodash/orderBy";
 import GameForm from "./GameForm";
 
+ const publishers = [
+   {_id: 1,
+   name: "Tensent"
+   }
+   {
+     _id: 2,
+     name: "Games"
+   }
+ ];
+
 const games = [
   {
     _id: "1",
+    publisher: 1,
     featured: true,
     name: "Batte Field",
     thumbnail:
@@ -18,6 +29,7 @@ const games = [
 
   {
     _id: "2",
+    publisher: 1,
     featured: false,
     name: "PUBG",
     thumbnail:
@@ -29,6 +41,7 @@ const games = [
 
   {
     _id: "3",
+    publisher: 2,
     featured: false,
     name: "Call off duty",
     thumbnail:
@@ -84,7 +97,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="ui container">
-        <GameForm />
+        <GameForm publishers={publishers}/>
         <br />
         <GameList
           games={this.state.games}
