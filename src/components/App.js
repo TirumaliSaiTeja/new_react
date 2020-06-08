@@ -1,18 +1,17 @@
+/* eslint-disable no-unused-vars */
+// eslint-disable-next-line
 import React, { Component } from "react";
 import GameList from "./GameList";
-import { thisExpression } from "@babel/types";
 import _orderBy from "lodash/orderBy";
 import GameForm from "./GameForm";
 
- const publishers = [
-   {_id: 1,
-   name: "Tensent"
-   }
-   {
-     _id: 2,
-     name: "Games"
-   }
- ];
+const publishers = [
+  { _id: 1, name: "Tensent" },
+  {
+    _id: 2,
+    name: "Games"
+  }
+];
 
 const games = [
   {
@@ -97,7 +96,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="ui container">
-        <GameForm publishers={publishers}/>
+        <GameForm publishers={publishers} />
         <br />
         <GameList
           games={this.state.games}
